@@ -19,17 +19,21 @@
 
 4. Open http://127.0.0.1:8000/docs to test the API.
 
-## Render Deployment
+## Render Deployment with Neon Database
 
-1. Create a new **Web Service** on Render.
-2. Connect your GitHub repository.
-3. Settings:
-   - **Runtime**: Python 3
-   - **Build Command**: `pip install -r requirements.txt`
-   - **Start Command**: `uvicorn app.main:app --host 0.0.0.0 --port $PORT`
-4. Add a **PostgreSQL** database on Render.
-   - Copy the `Internal Database URL`.
-5. In your Web Service settings, go to **Environment Variables**.
-   - Add `DATABASE_URL` and paste the internal database URL.
-   
+1. **Database Setup (Neon)**:
+   - Sign up at [Neon.tech](https://neon.tech).
+   - Create a new project.
+   - Copy the **Connection String** (it looks like `postgres://user:pass@ep-xyz.region.neon.tech/neondb?sslmode=require`).
+
+2. **App Deployment (Render)**:
+   - Create a new **Web Service** on Render.
+   - Connect your GitHub repository.
+   - Settings:
+     - **Runtime**: Python 3
+     - **Build Command**: `pip install -r requirements.txt`
+     - **Start Command**: `uvicorn app.main:app --host 0.0.0.0 --port $PORT`
+   - Go to **Environment Variables**:
+     - Add `DATABASE_URL` and paste your **Neon Connection String**.
+
 The application will automatically create the necessary tables on startup.
